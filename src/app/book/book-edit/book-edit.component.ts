@@ -20,13 +20,13 @@ export class BookEditComponent implements OnInit {
 
   // @ts-ignore
   bookForm: FormGroup;
-  _id = '';
+  id = 0;
   isbn = '';
   title = '';
   author = '';
   description = '';
   publisher = '';
-  publishedYear = '';
+  published = '';
   isLoadingResults = false;
   matcher = new MyErrorStateMatcher();
 
@@ -35,32 +35,34 @@ export class BookEditComponent implements OnInit {
   ngOnInit(): void {
     this.getBook(this.route.snapshot.paramMap.get('id'));
     this.bookForm = this.formBuilder.group({
+      'id' : [null, Validators.required],
       'isbn' : [null, Validators.required],
       'title' : [null, Validators.required],
       'author' : [null, Validators.required],
       'description' : [null, Validators.required],
       'publisher' : [null, Validators.required],
-      'publishedYear' : [null, Validators.required]
+      'published' : [null, Validators.required]
     });
   }
 
   getBook(id: any): void {
     this.api.getBook(id).subscribe((data: any) => {
-      this._id = data._id;
+      this.id = data.id;
       this.bookForm.setValue({
+        id: data.id,
         isbn: data.isbn,
         title: data.title,
         author: data.author,
         description: data.description,
         publisher: data.publisher,
-        publishedYear: data.publishedYear
+        published: data.published
       });
     });
   }
 
   onFormSubmit(): void {
     this.isLoadingResults = true;
-    this.api.updateBook(this._id, this.bookForm.value)
+    this.api.updateBook(this. id, this.bookForm.value)
       .subscribe((res: any) => {
           const id = res._id;
           this.isLoadingResults = false;
@@ -73,7 +75,7 @@ export class BookEditComponent implements OnInit {
   }
 
   bookDetails(): void {
-    this.router.navigate(['/book-details', this._id]);
+    this.router.navigate(['/book-details', this.id]);
   }
 
 

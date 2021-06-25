@@ -44,10 +44,10 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Published Year" formControlName="publishedYear"
+        <input matInput placeholder="Published Year" formControlName="published"
                [errorStateMatcher]="matcher">
         <mat-error>
-          <span *ngIf="!bookForm.get('publishedYear').valid && bookForm.get('publishedYear').touched">Please enter Published Year</span>
+          <span *ngIf="!bookForm.get('published').valid && bookForm.get('published').touched">Please enter Published Year</span>
         </mat-error>
       </mat-form-field>
       <div class="button-row">

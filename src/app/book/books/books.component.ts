@@ -9,7 +9,7 @@ import {ApiService} from "../api.service";
 })
 export class BooksComponent implements OnInit {
 
-  displayedColumns: string[] = ['title', 'author'];
+  displayedColumns: string[] = ['id' ,'title', 'author'];
   data: Book[] = [];
   isLoadingResults = true;
 
